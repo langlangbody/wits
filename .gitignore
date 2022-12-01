@@ -7,4 +7,12 @@ dist-ssr
 node_modules
 .idea/
 *.log
+
+# Yarn & Npm
+yarn.lock
+package-lock.json
+pnpm-lock.yaml
+# Vscode file
+.vscode/launch.json
+
 cypress/downloads

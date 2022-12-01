@@ -6,6 +6,7 @@ import type { UserModule } from './types'
 import generatedRoutes from '~pages'
 
 import '@unocss/reset/tailwind.css'
+import 'mussel/dist/mussel.css'
 import './styles/main.css'
 import 'uno.css'
 

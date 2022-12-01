@@ -11,7 +11,6 @@ const go = () => {
     router.push(`/hi/${encodeURIComponent(name)}`)
 }
 
-const { t } = useI18n()
 </script>
 
 <template>
@@ -25,7 +24,7 @@ const { t } = useI18n()
       </a>
     </p>
     <p>
-      <em text-sm opacity-75>{{ t('intro.desc') }}</em>
+      <em text-sm opacity-75>{{ 文档 }}</em>
     </p>
 
     <div py-4 />
@@ -36,7 +35,7 @@ const { t } = useI18n()
       autocomplete="false"
       @keydown.enter="go"
     />
-    <label class="hidden" for="input">{{ t('intro.whats-your-name') }}</label>
+    <label class="hidden" for="input">{{ 你的名字 }}</label>
 
     <div>
       <button
@@ -44,7 +43,7 @@ const { t } = useI18n()
         :disabled="!name"
         @click="go"
       >
-        {{ t('button.go') }}
+        {{ 跳转 }}
       </button>
     </div>
   </div>

@@ -2,7 +2,6 @@
 const props = defineProps<{ name: string }>()
 const router = useRouter()
 const user = useUserStore()
-const { t } = useI18n()
 
 watchEffect(() => {
   user.setNewName(props.name)
@@ -15,11 +14,11 @@ watchEffect(() => {
       <div i-carbon-pedestrian inline-block />
     </div>
     <p>
-      {{ t('intro.hi', { name: props.name }) }}
+      {{ props.name }}
     </p>
 
     <p text-sm opacity-75>
-      <em>{{ t('intro.dynamic-route') }}</em>
+      <em>{{ dynamic-route }}</em>
     </p>
 
     <template v-if="user.otherNames.length">
@@ -40,7 +39,7 @@ watchEffect(() => {
         btn m="3 t6" text-sm
         @click="router.back()"
       >
-        {{ t('button.back') }}
+        {{ 返回 }}
       </button>
     </div>
   </div>

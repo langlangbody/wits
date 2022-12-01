@@ -7,3 +7,12 @@
     </div>
   </main>
 </template>
+
+<style>
+  .mc-page-body{
+    position:absolute;
+    top: 56px;
+    left: 0;
+    right: 0;
+  }
+</style>
