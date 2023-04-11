@@ -9,20 +9,27 @@ import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Markdown from 'vite-plugin-vue-markdown'
 import { VitePWA } from 'vite-plugin-pwa'
-import VueI18n from '@intlify/vite-plugin-vue-i18n'
 import Inspect from 'vite-plugin-inspect'
 import LinkAttributes from 'markdown-it-link-attributes'
 import Unocss from 'unocss/vite'
 import Shiki from 'markdown-it-shiki'
 import VueMacros from 'unplugin-vue-macros/vite'
-
+import { createProxy } from './proxy'
+import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 export default defineConfig({
   resolve: {
     alias: {
       '~/': `${path.resolve(__dirname, 'src')}/`,
+      '@vbne': `${path.resolve(__dirname, 'vbne3')}/`,
     },
   },
-
+  css: {
+    preprocessorOptions: {
+        less: {
+            javascriptEnabled: true,
+        },
+    },
+  },
   plugins: [
     Preview(),
 
@@ -48,10 +55,17 @@ export default defineConfig({
       imports: [
         'vue',
         'vue-router',
-        'vue-i18n',
         'vue/macros',
         '@vueuse/head',
         '@vueuse/core',
+        {
+          'naive-ui': [
+            'useDialog',
+            'useMessage',
+            'useNotification',
+            'useLoadingBar'
+          ]
+        }
       ],
       dts: 'src/auto-imports.d.ts',
       dirs: [
@@ -65,6 +79,7 @@ export default defineConfig({
     Components({
       // allow auto load markdown components under `./src/components/`
       extensions: ['vue', 'md'],
+      resolvers: [NaiveUiResolver()],
       // allow auto import and register components used in markdown
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
       dts: 'src/components.d.ts',
@@ -75,17 +90,19 @@ export default defineConfig({
     Unocss(),
 
     // https://github.com/antfu/vite-plugin-vue-markdown
-    // Don't need this? Try vitesse-lite: https://github.com/antfu/vitesse-lite
     Markdown({
       wrapperClasses: 'prose prose-sm m-auto text-left',
       headEnabled: true,
+      table: true,
+      markdownItOptions: {
+        linkify: true,
+        typographer: true,
+      },
       markdownItSetup(md) {
         // https://prismjs.com/
         md.use(Shiki, {
-          theme: {
-            light: 'vitesse-light',
-            dark: 'vitesse-dark',
-          },
+          highlightLines: true,
+          theme: 'one-dark-pro',
         })
         md.use(LinkAttributes, {
           matcher: (link: string) => /^https?:\/\//.test(link),
@@ -125,19 +142,17 @@ export default defineConfig({
         ],
       },
     }),
-
-    // https://github.com/intlify/bundle-tools/tree/main/packages/vite-plugin-vue-i18n
-    VueI18n({
-      runtimeOnly: true,
-      compositionOnly: true,
-      include: [path.resolve(__dirname, 'locales/**')],
-    }),
-
     // https://github.com/antfu/vite-plugin-inspect
     // Visit http://localhost:3333/__inspect/ to see the inspector
     Inspect(),
   ],
-
+  server: {
+    proxy: createProxy([
+      ['/baidu', 'https://api.fanyi.baidu.com/'],
+      ['/index.php', 'http://sentence.iciba.com/'],
+      ['/mc-test-api', 'https://test.mctech.vip/']
+    ]),
+  },
   // https://github.com/vitest-dev/vitest
   test: {
     include: ['test/**/*.test.ts'],
@@ -155,7 +170,6 @@ export default defineConfig({
   },
 
   ssr: {
-    // TODO: workaround until they support native ESM
-    noExternal: ['workbox-window', /vue-i18n/],
+    noExternal: ['workbox-window'],
   },
 })

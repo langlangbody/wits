@@ -16,6 +16,7 @@
     "forceConsistentCasingInFileNames": true,
     "types": [
       "vitest",
+      "naive-ui/volar",
       "vite/client",
       "vue/ref-macros",
       "vite-plugin-pages/client",
