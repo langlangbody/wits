@@ -1,55 +1,32 @@
 <script setup lang="ts">
-defineOptions({
-  name: 'IndexPage',
-})
-const user = useUserStore()
-const name = $ref(user.savedName)
-
 const router = useRouter()
-const go = () => {
-  if (name)
-    router.push(`/hi/${encodeURIComponent(name)}`)
-}
 
+const routes = router.getRoutes().filter(i => i.name)
+const go = (routerUrl: string) => {
+  router.push(routerUrl)
+}
 </script>
 
 <template>
   <div>
-    <div text-4xl>
-      <div i-carbon-campsite inline-block />
-    </div>
-    <p>
-      <a rel="noreferrer" href="https://github.com/antfu/vitesse" target="_blank">
-        Vitesse
-      </a>
-    </p>
-    <p>
-      <em text-sm opacity-75>{{ 文档 }}</em>
-    </p>
-
-    <div py-4 />
-
-    <TheInput
-      v-model="name"
-      placeholder="What's your name?"
-      autocomplete="false"
-      @keydown.enter="go"
-    />
-    <label class="hidden" for="input">{{ 你的名字 }}</label>
-
     <div>
-      <button
-        btn m-3 text-sm
-        :disabled="!name"
-        @click="go"
+      <mu-button
+        v-for="item in routes"
+        :key="item.path"
+        primary
+        button-style="text"
+        @click="go(item.path)"
       >
-        {{ 跳转 }}
-      </button>
+        {{ item.path }}{{ item.name }}
+      </mu-button>
     </div>
   </div>
 </template>
 
 <route lang="yaml">
 meta:
-  layout: home
+  title: 首页
+  parentId: -1
+  layout: index
+  description: 首页
 </route>

@@ -3,7 +3,7 @@
     <div class="i-mc-icons:mctech-logo text-8" />
     <dev flex-1 />
     <mu-button>
-      小知识
+      小知识123
     </mu-button>
   </div>
 </template>

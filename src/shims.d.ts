@@ -14,3 +14,6 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
+
+declare module '@mctech/vue3-kaka-grid';
+declare module 'vditor/dist/method.min'

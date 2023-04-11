@@ -15,6 +15,7 @@
 .shiki-light {
   background: #f8f8f8 !important;
 }
+
 .shiki-dark {
   background: #0e0e0e !important;
 }
@@ -25,4 +26,16 @@ html.dark .shiki-light {
 
 html:not(.dark) .shiki-dark {
   display: none;
+}
+
+code[v-pre] {
+  display: flex;
+  flex-direction: column;
+}
+
+.shiki .highlighted {
+  background: #7f7f7f20;
+  display: block;
+  margin: 0 -1rem;
+  padding: 0 1rem;
 }

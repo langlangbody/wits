@@ -2,6 +2,16 @@
 title: About
 ---
 
+<route lang="yaml">
+meta:
+  title: 关于
+  layout: index
+  parentId: -1
+  desc: 关于
+</route>
+
+### This is {{frontmatter.title}}
+
 <div class="text-center">
   <!-- You can use Vue components inside markdown -->
   <div i-carbon-dicom-overlay class="text-4xl -mb-6 m-auto" />

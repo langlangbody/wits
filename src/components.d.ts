@@ -7,12 +7,14 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    Header: typeof import('./components/Header.vue')['default']
+    CodeMirror: typeof import('./components/codemirror/CodeMirror.vue')['default']
+    Markdown: typeof import('./components/Markdown/Markdown.vue')['default']
+    MarkdownViewer: typeof import('./components/Markdown/MarkdownViewer.vue')['default']
     README: typeof import('./components/README.md')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TheCounter: typeof import('./components/TheCounter.vue')['default']
     TheFooter: typeof import('./components/TheFooter.vue')['default']
-    TheInput: typeof import('./components/TheInput.vue')['default']
+    TheHeader: typeof import('./components/TheHeader.vue')['default']
   }
 }

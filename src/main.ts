@@ -9,10 +9,9 @@ import '@unocss/reset/tailwind.css'
 import 'mussel/dist/mussel.css'
 import './styles/main.css'
 import 'uno.css'
-
+import '~/utils/custom-grid-theme'
 const routes = setupLayouts(generatedRoutes)
 
-// https://github.com/antfu/vite-ssg
 export const createApp = ViteSSG(
   App,
   { routes, base: import.meta.env.BASE_URL },

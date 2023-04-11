@@ -11,13 +11,12 @@
       <div i="carbon-sun dark:carbon-moon" />
     </button>
 
-
     <RouterLink class="icon-btn mx-2" to="/about" title="关于">
       <div i-carbon-dicom-overlay />
     </RouterLink>
 
-    <RouterLink class="icon-btn mx-2" to="/md-file/zt123" title="zt123">
-      <span>zt123</span>
+    <RouterLink class="icon-btn mx-2" to="/mussel-doc/demo" title="demo">
+      <span>demo</span>
     </RouterLink>
   </nav>
 </template>
